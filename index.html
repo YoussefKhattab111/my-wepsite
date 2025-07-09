@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microblog - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Microblog</h1>
+            </div>
+            
+            <div class="nav-search">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search users...">
+                    <i class="fas fa-search"></i>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <div id="authButtons">
+                    <a href="login.html" class="nav-link">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+                <div id="userMenu" class="user-menu" style="display: none;">
+                    <a href="profile.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <button id="logoutBtn" class="nav-link logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Posts Feed -->
+            <div class="posts-container">
+                <div id="postsContainer">
+                    <!-- Posts will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Post Modal -->
+    <div id="createPostModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Post</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="user-info">
+                    <img id="modalUserAvatar" src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
+                    <div>
+                        <strong id="modalUserName">User</strong>
+                        <p id="modalUserUsername">@username</p>
+                    </div>
+                </div>
+                <textarea id="postContent" placeholder="What's on your mind?" maxlength="500"></textarea>
+                <div class="post-images-preview" id="postImagesPreview"></div>
+                <div class="modal-actions">
+                    <div class="post-options">
+                        <button type="button" id="addImageBtn" class="option-btn">
+                            <i class="fas fa-image"></i>
+                            Image
+                        </button>
+                        <button type="button" id="addEmojiBtn" class="option-btn">
+                            <i class="fas fa-smile"></i>
+                            Emoji
+                        </button>
+                    </div>
+                    <button id="publishPostBtn" class="btn btn-primary">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Details Modal -->
+    <div id="postModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Post Details</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="postDetails"></div>
+                <div class="comments-section">
+                    <h4>Comments</h4>
+                    <div class="add-comment">
+                        <img id="commentUserAvatar" src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
+                        <input type="text" id="commentInput" placeholder="Write a comment...">
+                        <button id="addCommentBtn" class="btn btn-primary">Send</button>
+                    </div>
+                    <div id="commentsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div id="imageUploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Image</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="upload-options">
+                    <div class="upload-option">
+                        <input type="file" id="imageFileInput" accept="image/*" multiple>
+                        <label for="imageFileInput" class="upload-btn">
+                            <i class="fas fa-upload"></i>
+                            Upload from Device
+                        </label>
+                    </div>
+                    <div class="upload-option">
+                        <input type="url" id="imageUrlInput" placeholder="Enter image URL...">
+                        <button id="addImageUrlBtn" class="btn btn-secondary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button id="fabBtn" class="fab" style="display: none;">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>

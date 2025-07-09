@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microblog - Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Microblog</h1>
+            </div>
+            
+            <div class="nav-search">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search users...">
+                    <i class="fas fa-search"></i>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="profile.html" class="nav-link active">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <button id="logoutBtn" class="nav-link logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-cover">
+                    <img id="profileCover" src="https://via.placeholder.com/1200x300/6366f1/ffffff?text=Cover" alt="Cover Image">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-avatar-section">
+                        <img id="profileAvatar" src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-avatar">
+                        <div class="profile-details">
+                            <h1 id="profileName">User Name</h1>
+                            <p id="profileUsername">@username</p>
+                            <p id="profileBio">Bio</p>
+                            <div class="profile-meta">
+                                <span id="profileLocation"><i class="fas fa-map-marker-alt"></i> <span>Location</span></span>
+                                <span id="profileWebsite"><i class="fas fa-link"></i> <a href="#" target="_blank">Website</a></span>
+                                <span id="profileJoinDate"><i class="fas fa-calendar-alt"></i> <span>Join Date</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button id="editProfileBtn" class="btn btn-outline">
+                            <i class="fas fa-edit"></i>
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <strong id="postsCount">0</strong>
+                        <span>Posts</span>
+                    </div>
+                    <div class="stat">
+                        <strong id="followersCount">0</strong>
+                        <span>Followers</span>
+                    </div>
+                    <div class="stat">
+                        <strong id="followingCount">0</strong>
+                        <span>Following</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="posts">Posts</button>
+                <button class="tab-btn" data-tab="followers">Followers</button>
+                <button class="tab-btn" data-tab="following">Following</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <div id="postsTab" class="tab-pane active">
+                    <div id="userPosts"></div>
+                </div>
+                <div id="followersTab" class="tab-pane">
+                    <div id="followersList"></div>
+                </div>
+                <div id="followingTab" class="tab-pane">
+                    <div id="followingList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label>Cover Image</label>
+                        <div class="image-upload-section">
+                            <div class="current-image">
+                                <img id="editCoverPreview" src="https://via.placeholder.com/400x150" alt="Cover Image">
+                            </div>
+                            <div class="upload-buttons">
+                                <input type="file" id="coverImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('coverImageInput').click()">
+                                    <i class="fas fa-camera"></i>
+                                    Change Cover
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <div class="avatar-upload-section">
+                            <img id="editAvatarPreview" src="https://via.placeholder.com/80" alt="Profile Picture" class="avatar-preview">
+                            <div class="upload-buttons">
+                                <input type="file" id="avatarImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('avatarImageInput').click()">
+                                    <i class="fas fa-camera"></i>
+                                    Change Picture
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editName">Name</label>
+                        <input type="text" id="editName" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editBio">Bio</label>
+                        <textarea id="editBio" name="bio" maxlength="160" placeholder="Write something about yourself..."></textarea>
+                        <div class="char-count">
+                            <span id="bioCharCount">0</span>/160
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editLocation">Location</label>
+                        <input type="text" id="editLocation" name="location" placeholder="City, Country">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editWebsite">Website</label>
+                        <input type="url" id="editWebsite" name="website" placeholder="https://example.com">
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('editProfileModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button id="fabBtn" class="fab">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="profile.js"></script>
+</body>
+</html>
